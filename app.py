@@ -1,6 +1,14 @@
 import streamlit as st
 import pickle as pk
-from sklearn.feature_extraction.text import TfidfVectorizer
+import os
+import subprocess
+
+try:
+    from sklearn.feature_extraction.text import TfidfVectorizer
+except ModuleNotFoundError:
+    subprocess.run(["pip", "install", "scikit-learn"])
+    from sklearn.feature_extraction.text import TfidfVectorizer
+
 
 
 model = pk.load(open('model.pkl', 'rb'))
