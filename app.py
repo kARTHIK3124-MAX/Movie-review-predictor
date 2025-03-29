@@ -12,23 +12,23 @@ except ModuleNotFoundError:
 
 
 
-# Load Model & Vectorizer
+
 model = pk.load(open('model.pkl', 'rb'))
 vectorizer = pk.load(open('vectorizer.pkl', 'rb'))
 
-# Streamlit UI
+
 st.title("🎬 IMDb Sentiment Analysis")
 user_review = st.text_input('Enter your review')
 
 if st.button('Predict'):
     if user_review:
-        # Convert input into TF-IDF format
+       
         review_tfidf = vectorizer.transform([user_review]).toarray()
         
-        # Make prediction
+        
         result = model.predict(review_tfidf)
 
-        # CSS for falling emojis
+       
         falling_emoji_script = """
         <style>
         @keyframes fall {
@@ -44,7 +44,7 @@ if st.button('Predict'):
         <div style="position: relative; height: 500px;">
         """
 
-        # Show result & emojis
+       
         if result[0] == 1:
             st.success('😊 Positive Review')
             falling_emoji_script += "".join([f'<span class="emoji" style="left:{i*10}%">😊</span>' for i in range(10)])
